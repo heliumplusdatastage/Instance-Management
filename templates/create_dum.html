@@ -1,0 +1,133 @@
+\<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block content %}
+<html>
+
+<head>
+
+    <style>
+.sensitive {
+           margin-left: 40%;
+           width: 300px;
+           margin-top: 500px;
+}
+.zero {
+	position: absolute;
+	color:#4c7aaf;
+	width: 1000px;
+	font-style: bold;
+	margin-top:330px;
+	position: center;
+	margin-left: 39%;
+	color:  #FF0000;
+}
+.logo {
+	position: absolute;
+
+	height: auto;
+	margin-top: 25px;
+	margin-left: 410px;
+	float: center;
+	width: 10%;
+}
+.Hero {
+	position: absolute;
+	color:#4c7aaf;
+	width: 1000px;
+	font-style: bold;
+	margin-top:125px;
+	position: center;
+	margin-left: 440px;
+}
+.btn {
+	position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #74b2aa;
+    color: black;
+    font-size: 16px;
+    padding: 16px 30px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    margin-top:60px;
+}
+.container .btn:hover {
+    background-color: black;
+    color: white;
+}
+.main-nav {
+
+margin-top: 25%;
+	color:Black;
+	text-decoration: none;
+	padding: 5px 20px;
+	font-family: "Roboto", sans-serif;
+	font-size: 20px;
+	margin-left: 40%;
+
+
+}
+.main-nav ul l{
+    list-style-type: disc;
+    font-size:56px;
+}
+.clrtwo{
+color: #2A913C;
+}
+.clrone{
+color: #32D7DD;
+}
+.clrthree{
+color: #EE6D0E;
+}
+</style>
+</head>
+
+<body>
+
+<div class="logo">
+    <img src="/static/images/jup.PNG">
+</div>
+
+<div class="Hero">
+    <h2>
+        &nbspWelcome to <span class="clrtwo">Commons</span><span class="clrone">Share's</span> <span class="clrthree">JupyterHub</span><br> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspinstance Creator Web App
+    </h2>
+    <br>
+</div>
+<form method="post">
+{% csrf_token %}
+<button id="myBtn" onclick="myFunction()" class="btn" formmethod="post">Create your Instance</button>
+
+<script>
+function myFunction() {
+    document.getElementById("myBtn").innerHTML = "Please wait. You will be redirected. It may take upto 10 mins.";
+}
+</script>
+</form>
+  
+<div class="zero">
+    <h4>WHEN CREATING YOUR INSTANCE:<br></h4>
+      <h5> &nbsp&nbsp&nbsp&nbsp&nbspPlease keep your "Browser Window Open" </h5>
+    <br>
+</div>
+
+<div class="sensitive">
+    
+      <p><font size="4">Dear Helium+ Stack User: </font><br>Please note that Amazon EC2 Virtual Machine instance that is being created for you now includes access to real patient 
+      lung data covered by a Data Use Agreement (DUA) you have agreed to.<br> Please be mindful of this while adhereing to the terms of the DUA as you work with this instance.
+      <br>Your cooperation is appreciated.</p>
+
+</div>
+
+</body>
+</html>
+{% endblock %}
+
+
+

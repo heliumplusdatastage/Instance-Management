@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2 class="page-title">Sign Up</h2>
+                <div class="col-sm-6">
+                    <!-- signup -->
+	                <div class="front-signup js-front-signup">
+						<form id="form-signup" action="/accounts/signup/" method="post" role="form">
+							{% csrf_token %}
+							<div class="row">
+								<div class="form-group half">
+									<fieldset class="form-group input_id_first_name">
+										<input autofocus="" id="id_first_name" maxlength="30" name="first_name" placeholder="First name" type="text">
+									</fieldset>
+									<fieldset class="form-group input_id_last_name">
+										<input id="id_last_name" maxlength="30" name="last_name" placeholder="Last name" type="text">
+									</fieldset>
+								</div>
+								<div class="form-group">
+									<fieldset class="form-group input_id_email">
+										<input id="id_email" maxlength="254" name="email" placeholder="Email address" type="email">
+									</fieldset>
+								</div>
+								<div class="form-group">
+									<fieldset class="form-group input_id_username">
+										<input id="id_username" maxlength="30" name="username" placeholder="Username" required="" type="text">
+									</fieldset>
+								</div>
+								<div class="form-group">
+									<fieldset class="form-group input_id_password1">
+										<input autocomplete="off" id="id_password1" name="password1" placeholder="Password" type="password">
+									</fieldset>
+								</div>
+								<div class="form-group">
+									<fieldset class="form-group input_id_password2">
+										<input autocomplete="off" id="id_password2" name="password2" placeholder="Password (again)" type="password">
+									</fieldset>
+								</div>
+							</div>
+							  <div id="missing-data-div"> </div>
+								  <input class="btn btn-primary" type="button" id="signup" value="Join CommonsShare &amp; start collaborating">
+						  </div>
+						</form>
+						<script type="text/javascript">
+
+							$(document).ready(function() {
+								 $('input[type="button"]').prop('disabled', false);
+								 // remove the content of the 'missing-data-div' upon data editing in any of the
+								// form fields
+								 var fieldsToCheck = ["#id_first_name", "#id_last_name", "#id_username", "#id_email",
+									 "#id_password1", "#id_password2"];
+
+								 var i;
+								 for (i=0; i< fieldsToCheck.length; i++){
+									 $(fieldsToCheck[i]).keyup(function () {
+										 $("#missing-data-div").html(" ");
+									 });
+									 $(fieldsToCheck[i]).change(function () {
+										 $("#missing-data-div").html(" ");
+									 });
+								 }
+							});
+
+							// Only letters, numbers, dashes, dot, underscore, or @ are viewed as valid characters
+							// to conform to the same user name validation rules in Django with + removed from set of
+							// valid characters since although + is supported as a valid character in username field,
+							// it is not supported as a valid character in corresponding iRODS username
+							function validateUserName() {
+								var regex = /^[a-zA-Z0-9-_.@]+$/;
+								var username = $("#id_username");
+
+								if (!username.val()) {
+									return false;
+								}
+
+								if (!regex.test(username.val())) {
+									return false;
+								}
+								return true;
+							}
+
+							$(function() {
+								$("#signup").click(function() {
+									var password = $("#id_password1").val();
+									var pwconfirm = $("#id_password2").val();
+									// These are the required form fields
+									var requiredFieldsToCheck = ["#id_username", "#id_email", "#id_password1",
+										"#id_password2"];
+									var fieldNames = [ 'User name', 'Email', 'Password', 'Password (again)'];
+									var empty = false;
+									var missingFields = 'Data missing for:';
+									var missingFieldCount = 0;
+									var j;
+									for(j=0; j< requiredFieldsToCheck.length; j++) {
+										if ($(requiredFieldsToCheck[j]).val() == '') {
+											empty = true;
+											if (missingFieldCount == 0){
+												missingFields += " " + fieldNames[j];
+											}
+											else {
+												missingFields += ", " + fieldNames[j];
+											}
+											missingFieldCount++;
+										}
+								   }
+								   // validate username to make sure username not only passes django username validation
+								   // but also passed iRODS username validation
+								   var username_valid = validateUserName();
+								   if(empty || !username_valid) {
+									   var warning_str = '';
+									   if(empty)
+										   warning_str += missingFields;
+									   if(!username_valid) {
+										   if (empty)
+											   warning_str += "<br>";
+										   warning_str += "username is not valid - make sure username only contains " +
+											   "letters, numbers, dashes, dot, underscore, or @";
+									   }
+									   $("#missing-data-div").html('<p class="alert alert-danger">' + warning_str +'</p>');
+									   return;
+								   }
+									function onSuccess() {
+										document.location.href = '/verify-account/';
+									}
+									function onFailure(data, stuff) {
+										console.log(data);
+										console.log(stuff);
+										alert('cannot create account');
+									}
+									if (password && pwconfirm) {
+										if (password === pwconfirm) {
+											$('#form-signup').submit();
+										} else {
+											$("#id_password1").val('');
+											$("#id_password2").val('');
+											$("#missing-data-div").append('<p class="alert alert-danger">Passwords do not match</p>');
+										}
+									}
+								});
+							});
+
+
+						</script>
+                    </div>
+                <!-- signup -->
+	            </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

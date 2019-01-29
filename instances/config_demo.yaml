@@ -1,0 +1,16 @@
+awscredentials:
+  awsaccessid: "aws-access-id"
+  awssecretkey: "aws-secret-key"
+
+cpuinstanceattributes:
+  instanceid: "instance-id"
+  amiid: "ami-id"
+  unit: "CPU"
+
+gpuinstanceattributes:
+  instanceid: "instance-id"
+  amiid: "ami-id"
+  unit: "GPU"
+
+secuirtygroup:
+  sg: "security group id"

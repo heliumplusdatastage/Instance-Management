@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<div class="container">
+		<div class="row">
+		<div class="col-xs-12">
+		    <h2 class="page-title">Sign In</h2>
+		</div>
+		<div class="col-xs-12 col-sm-6">
+			{% if message %}
+				<div class="alert alert-danger">
+				  <strong>Error!</strong> Unable to sign in !!
+				</div>
+			{% endif %}
+		    <form class="account-form" method="post" action="">
+				{% csrf_token %}
+		        <fieldset>
+		            <div class="row">
+						<fieldset class="form-group form-group-checkbox input_id_username col-md-12">
+							<label class="control-label" for="id_username" style="margin-left:0px">Username</label>
+							<input autofocus="" id="id_username" name="username" required="" type="text" >							
+						</fieldset>
+		            </div>
+		            <div class="row">
+						<fieldset class="form-group form-group-checkbox input_id_password col-md-12">
+							<label class="control-label" for="id_password" style="margin-left:0px">Password</label>
+						    <input id="id_password" name="password" required="" type="password">						    
+						</fieldset>
+		            </div>
+					<br/>
+		            <input type="hidden" name="next" value="">
+		                <div class="row">
+		                    <div class="col-md-12">
+		                        <input class="btn btn-primary" type="submit" value="Sign In">
+		                    </div>
+		                </div>		                
+		        </fieldset>
+		    </form>
+			<br/>
+			<p></p>
+		</div>		    
+	</div>
+{% endblock %}

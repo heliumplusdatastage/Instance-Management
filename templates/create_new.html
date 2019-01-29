@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block content %}
+<html>
+  <head>
+    <style>
+      .zero {
+        color: #4c7aaf;
+        font-style: bold;
+        text-align: center;
+        position: center;
+        color:  #FF0000;
+      }
+      .logo {
+        height: auto;
+        float: center;
+        width: 10%;
+      }
+      .Hero {
+        color: #4c7aaf;
+        font-style: bold;
+        text-align: center;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      form {
+        text-align: center;
+      }
+      .btn {
+        background-color: #74b2aa;
+        color: black;
+        font-size: 16px;
+        padding: 16px 30px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: 60px;
+      }
+      .btn:hover {
+          background-color: black;
+          color: white;
+          transition: background-color 250ms, color 250ms;
+      }
+      .main-nav {
+        color: #000;
+        text-decoration: none;
+        padding: 5px 20px;
+        font-family: "Roboto", sans-serif;
+        font-size: 16px;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+      .main-nav ul {
+        list-style-type: disc;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="logo">
+      <img src="/static/images/jup.PNG">
+    </div>
+    <div class="Hero">
+      <h2>In order for you to conduct research you will need to create your own Jupyter Notebook Instance</h2>
+    </div>
+    <form method="post">
+      {% csrf_token %}
+      <button id="mybutton" type="submit" method="post" class="btn">
+        Create Your Instance
+      </button>
+    </form>
+    <div class="zero">
+      <h4>WHEN CREATING YOUR INSTANCE:</h4>
+      <h5>Please keep your "Browser Window Open"</h5>
+    </div>
+    <ul class="main-nav">
+      <h3>Your Instance:</h3>
+      <ul>
+        <li> EBS Volume size: 8GiB</li>
+        <li> Volume Type: gp2</li>
+        <li> EFS Volume size: 14.4TiB</li>
+        <li> Deep Learning tools: Tensorflow, Keras, PyTorch</li>
+      </ul>
+    </ul>
+  </body>
+</html>
+{% endblock %}
