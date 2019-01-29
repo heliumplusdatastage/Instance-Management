@@ -144,7 +144,7 @@ def main(username, ins_type):
     target_images = []
     block_device_maps = []
 
-    awsaccessid, awssecretkey, ami_id, instance_id, unit, sg = config_parser.parser()
+    awsaccessid, awssecretkey, ami_id, instance_id, unit, sg = config_parser.parser(ins_type)
 
     connection = connect_to_region('us-east-1',
                                    aws_access_key_id=awsaccessid,
@@ -164,13 +164,13 @@ def main(username, ins_type):
     root_device_name = source_image.root_device_name
     print("ROOT_DEVICE_NAME", root_device_name)
 
-    source_securitygroup = connection.get_all_security_groups(group_ids=["sg])
+    source_securitygroup = connection.get_all_security_groups(group_ids=[sg])
     print("SOURCE_SECURITYGROUP", source_securitygroup)
     for sg in source_securitygroup:
         source_sg = sg.id
 
 
-    volume_id = connection.get_all_volumes(filters={'attachment.instance_id': [ins_id]})
+    volume_id = connection.get_all_volumes(filters={'attachment.instance_id': [instance_id]})
     print("VOLUME_ID", volume_id)
     for vol in volume_id:
         source_volume_id = vol.id

@@ -8,13 +8,15 @@ def parser(type):
         aws_secret_key = data_loaded["awscredentials"]["awssecretkey"]
         sg = data_loaded["secuirtygroup"]["sg"]
 
-        if ins_type == "p2.xlarge":
+        if type == "p2.xlarge":
             ami_id = data_loaded["gpuinstanceattributes"]["amiid"]
             ins_id = data_loaded["gpuinstanceattributes"]["instanceid"]
             unit = data_loaded["gpuinstanceattributes"]["unit"]
+            print(ami_id, ins_id, unit)
         else:
             ami_id = data_loaded["cpuinstanceattributes"]["amiid"]
             ins_id = data_loaded["gpuinstanceattributes"]["instanceid"]
             unit = data_loaded["gpuinstanceattributes"]["unit"]
+            print(ami_id, ins_id, unit)
 
         return aws_access_id, aws_secret_key, ami_id, ins_id, unit, sg
