@@ -15,7 +15,7 @@ from django.utils import timezone
 from instances import config_parser
 
 def main(username, type):
-    awsaccessid, awssecretkey = config_parser.parser()
+    awsaccessid, awssecretkey = config_parser.parser(type)
     region = "us-east-1"
     ec2client = boto3.client('ec2', region_name=region, aws_access_key_id=awsaccessid, aws_secret_access_key=awssecretkey)
     ec2resourceclient = boto3.resource('ec2', region_name=region,
