@@ -1,7 +1,7 @@
 import yaml
 
 def parser(type):
-    with open("/home/ubuntu/ec2clone-kyle/instances/config.yaml", 'r') as cred:
+    with open("/home/ubuntu/Instance-Management/instances/config_demo.yaml", 'r') as cred:
         data_loaded = yaml.load(cred)
 
         aws_access_id = data_loaded["awscredentials"]["awsaccessid"]
