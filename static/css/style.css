@@ -1,0 +1,65 @@
+/** { border: 1px solid #f66; }*/
+
+body {
+}
+
+.hero {
+  color:#4c7aaf;
+  font-style: bold;
+  margin:10rem;
+  text-align: center;
+  height: 25vh;
+  max-height: 300px;
+}
+
+.color-commons { color: #2A913C; }
+.color-share { color: #32D7DD; }
+.color-jupyterhub { color: #EE6D0E; }
+
+.logo {
+  margin: auto;
+  width: 100%;
+  max-width: 600px;
+}
+
+.container {
+  min-height: 100%;
+}
+
+.create-form {
+  padding: 4rem 0;
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+
+.create-form > select {
+  font-size: 150%;
+  margin-bottom: 4rem;
+}
+
+.running-instances {
+  margin-bottom: 4rem;
+}
+
+.running-instances-bucket {
+  background-color: #eee;
+  padding: 0.5rem;
+  border-radius: 5px;
+  margin-bottom: 4rem;
+}
+
+.running-instances-bucket__title {
+  margin: 0 0 1rem 0;
+  padding: 0.5rem;
+}
+
+.running-instances-bucket__contents {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+
+.instructions {
+  margin-bottom: 4rem;
+}

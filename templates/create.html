@@ -1,132 +1,101 @@
-<!DOCTYPE html>
 {% extends 'base.html' %}
 
 {% block content %}
-<html>
 
-<head>
+    <div class="hero">
+        <img class="logo" src="/static/images/jup.PNG">
+        <h1>
+            Welcome to
+            <span class="color-commons">Commons</span><span class="color-share">Share's</span>
+            <span class="color-jupyterhub">JupyterHub</span>
+        </h1>
+    </div>
 
-    <style>
-.sensitive {
-           margin-left: 40%;
-           width: 300px;
-           margin-top: 500px;
-}
+    <div class="row">
+        <div class="col-xs-12 col-md-8 col-md-offset-2">
+            <h2>Create an Instance</h2>
 
-.logo {
-	position: absolute;
-
-	height: auto;
-	margin-top: 25px;
-	margin-left: 410px;
-	float: center;
-	width: 10%;
-}
-.Hero {
-	position: absolute;
-	color:#4c7aaf;
-	width: 1000px;
-	font-style: bold;
-	margin-top:125px;
-	position: center;
-	margin-left: 440px;
-}
-.btn {
-	position: absolute;
-    margin-left: 5%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    background-color: #74b2aa;
-    color: black;
-    font-size: 16px;
-    padding: 16px 30px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    text-align: center;
-    margin-top: 5%;
-}
-
-.buttons {
-     position: absolute;
-        width: 1000px;
-        font-style: bold;
-        font-size: 25px
-        margin-top:250px;
-        position: center;
-        margin-left: 46.2%;
-        margin-top: 18%;
-}
-.container .btn:hover {
-    background-color: black;
-    color: white;
-}
-.main-nav {
-
-margin-top: 25%;
-	color:Black;
-	text-decoration: none;
-	padding: 5px 20px;
-	font-family: "Roboto", sans-serif;
-	font-size: 20px;
-	margin-left: 40%;
-
-
-}
-.main-nav ul l{
-    list-style-type: disc;
-    font-size:56px;
-}
-.clrtwo{
-color: #2A913C;
-}
-.clrone{
-color: #32D7DD;
-}
-.clrthree{
-color: #EE6D0E;
-}
-</style>
-</head>
-
-<body>
-
-<div class="logo">
-    <img src="/static/images/jup.PNG">
-</div>
-
-<div class="Hero">
-    <h2>
-        &nbspWelcome to <span class="clrtwo">Commons</span><span class="clrone">Share's</span> <span class="clrthree">JupyterHub</span><br> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspinstance Creator Web App
-    </h2>
-    <br>
-</div>
-
-<form method="post">
-{% csrf_token %}
-<div class="buttons">
-    <input type="radio" name="type" value="t2.2xlarge" checked> t2.2xlarge<br>
-    <input type="radio" name="type" value="t2.large"> t2.large<br>
-    <input type="radio" name="type" value="p2.xlarge"> p2.xlarge<br><br>
-    <button id="myBtn" onclick="myFunction()" class="btn" formmethod="post">Create/Start/Stop</button>
-</div>
-<script>
-function myFunction() {
-    document.getElementById("myBtn").innerHTML = "Redirecting...";
-}
-</script>
-</form>
-
-<div class="sensitive">
+            <form method="post" class="create-form" action="">
+                {% csrf_token %}
+                <select class="form-control form-control-lg" id="instance-type">
+                    <option>Instance Type</option>
+                    <option value="t2.2xlarge">t2.2xlarge</option>
+                    <option value="t2.large">t2.large</option>
+                    <option value="p2.xlarge">p2.xlarge</option>
+                </select>
+                <select class="form-control form-control-lg" id="instance-platform">
+                    <option>Platform</option>
+                    <option value="jupyter-hub">JupyterHub</option>
+                    <option value="r-studio">RStudio</option>
+                    <option value="dicom-viewer">DICOM viewer<br></option>
+                </select>
+                <button id="create-instance-button" onclick="createInstance()" class="btn btn-primary btn-lg" formmethod="post">Create New Instance</button>
+                <!--
+                    Here, we'd need some logic to send the request
+                    and to test whether a repsonse has been received.
+                    When the Create button is pressed, remove the button from the DOM (or hide it) and then wait,
+                    showing progress bar or loading spinner until the response is received.                
+                -->
+                <script>
+                    function createInstance() {
+                        document.getElementById("create-instance-button").innerHTML = "Redirecting...";
+                    }
+                </script>
+            </form>                
+        </div>
+    </div>
     
-      <p><font size="4">Dear Helium+ Stack User: </font><br>Please note that Amazon EC2 Virtual Machine instance that is being created for you now includes access to real patient 
-      lung data covered by a Data Use Agreement (DUA) you have agreed to.<br> Please be mindful of this while adhereing to the terms of the DUA as you work with this instance.
-      <br>Your cooperation is appreciated.</p>
+    <div class="row">
+        <div class="col-xs-12 col-md-8 col-md-offset-2 running-instances">
+            <h2>Running Instances</h2>
+            <p>
+                Any already-running instances will appear below.
+                Simply click on the name of a running instance to reconnect to it.
+            </p>
+            <div class="running-instances-bucket t2-large">
+                <h3 class="running-instances-bucket__title">t2.large (4)</h3>
+                <div class="running-instances-bucket__contents">
+                    <button class="btn btn-info" onclick="connectToInstance('Instance Name')">Instance Name</button>
+                    <button class="btn btn-info" onclick="connectToInstance('Another Instance')">Another Instance</button>
+                    <button class="btn btn-info" onclick="connectToInstance('Here's One')">Here's One</button>
+                    <button class="btn btn-info" onclick="connectToInstance('Yet Another One')">Yet Another One</button>
+                </div>
+            </div>
+            <div class="running-instances-bucket t2-large">
+                <h3 class="running-instances-bucket__title">t2.large (0)</h3>
+                <div class="running-instances-bucket__contents">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="running-instances-bucket t2-large">
+                <h3 class="running-instances-bucket__title">t2.large (2)</h3>
+                <div class="running-instances-bucket__contents">
+                    <button class="btn btn-info" onclick="connectToInstance()">So Many</button>
+                    <button class="btn btn-info" onclick="connectToInstance()">Instances</button>
+                </div>
+            </div>
+        </div>
+                </div>
+        <script>
+            // redirect to page when connection where instance interaction occurs
+            function connectToInstance(name) { alert(`Connecting to this instance ${name}...`)}
+        </script>
+    </div>
 
-</div>
+    <div class="row">
+        <div class="col-xs-12 col-md-8 col-md-offset-2">
+            <div class="instructions">
+                <h4>Dear Helium+ Stack User:</h4>
+                <p>
+                    Please note that Amazon EC2 Virtual Machine instance that is being created for you now includes access to real patient 
+                    lung data covered by a Data Use Agreement (DUA) you have agreed to.
+                    Please be mindful of this while adhereing to the terms of the DUA as you work with this instance.
+                    Your cooperation is appreciated.
+                </p>                
+            </div>
+        </div>
+    </div>
 
-</body>
-</html>
 {% endblock %}
 
 
