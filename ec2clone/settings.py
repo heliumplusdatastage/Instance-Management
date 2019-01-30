@@ -27,8 +27,7 @@ SECRET_KEY = 'x8*0)16%fxm4vwpugudip@1k25=)6dgo+&p(#0)fy$==n%%78q'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-        '18.235.88.207',
-        'copdgenejupyterlauncher.commonsshare.org']
+        "3.94.31.178",]
 
 
 # Application definition

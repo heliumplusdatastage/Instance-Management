@@ -29,6 +29,8 @@ now = timezone.now
 whitelist = [
     'krferrit@unc.edu'
 ]
+
+
 body_list = []
 def get_auth_redirect():
     # set return_to to be where user is redirected back to upon successful login
@@ -103,14 +105,16 @@ def check_authorization(request):
 #@login_required(login_url='/accounts/login/')
 def create_instance(request):
 
-    token = request.GET.get('access_token')
-    validate_url = "https://auth.commonsshare.org/validate_token?access_token="
-    resp = requests.get(validate_url + token)
-    body = json.loads(resp.content.decode('utf-8'))
-    username = body.get("username")
-    print("Auth_Resp", username)
+    #token = request.GET.get('access_token')
+    #validate_url = "https://auth.commonsshare.org/validate_token?access_token="
+    #resp = requests.get(validate_url + token)
+    #body = json.loads(resp.content.decode('utf-8'))
+    #username = body.get("username")
+    #print("Auth_Resp", username)
 
     if request.method == "POST":
+        username = "rencitestuser"
+        request.session['username'] = username
         type = request.POST.get("type")
         print(type)
         flag = checker_db.instance_check(username, type)
@@ -131,14 +135,14 @@ def create_instance(request):
                 return HttpResponseRedirect("/terminateinstance/")
 
             else:
-                auth_resp = check_authorization(request)
+                #auth_resp = check_authorization(request)
                 UserProfiles.objects.filter(username=username, ins_type=type).delete()
-                if auth_resp.status_code != 200:
-                    return auth_resp
+                #if auth_resp.status_code != 200:
+                #    return auth_resp
 
-                else:
-                    request.session["ins_type"] = type
-                    return HttpResponseRedirect("/createinstance/")
+                #else:
+                request.session["ins_type"] = type
+                return HttpResponseRedirect("/createinstance/")
 
         else:
             url = "/createinstance/"
@@ -147,14 +151,14 @@ def create_instance(request):
             return HttpResponseRedirect(url)
 
     else:
-        auth_resp = check_authorization(request)
-        if auth_resp.status_code != 200:
-            return auth_resp
+        #auth_resp = check_authorization(request)
+        #if auth_resp.status_code != 200:
+        #    return auth_resp
 
-        else:
+        #else:
             #request.session["ins_type"] = type
             #return HttpResponseRedirect("/createinstance/")
-            return render(request, "create.html", context={})
+        return render(request, "create.html", context={})
 
 def terminateinstance(request):
     return render(request, "terminate.html", context={})
@@ -169,11 +173,12 @@ def create_dum(request):
     print(request.META)
     print("SESSION", request.session.items())
     if request.method == "POST":
-        token = request.session['token']
-        validate_url = 'https://auth.commonsshare.org/validate_token?access_token='
-        resp = requests.get(validate_url + token)
-        body = json.loads(resp.content.decode('utf-8'))
-        username = body.get("username")
+        #token = request.session['token']
+        #validate_url = 'https://auth.commonsshare.org/validate_token?access_token='
+        #resp = requests.get(validate_url + token)
+        #body = json.loads(resp.content.decode('utf-8'))
+        #username = body.get("username")
+        username = "rencitestuser"
         ins_type = request.session["ins_type"]
         instance_ip = src2.main(username, ins_type)
         user_instance1 = UserProfiles.objects.create(username=username, staticip=instance_ip, ins_type=ins_type)
@@ -186,10 +191,10 @@ def create_dum(request):
         return render(request, "create_dum.html", {})
 
 def home_page_view(request):
-    auth_resp = check_authorization(request)
-    print(auth_resp)
-    if auth_resp.status_code != 200:
-        return auth_resp
+    #auth_resp = check_authorization(request)
+    #print(auth_resp)
+    #if auth_resp.status_code != 200:
+    #    return auth_resp
     return render(request, "home.html", {})
 
 
@@ -203,7 +208,7 @@ def signin_view(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return redirect('create')
+                return redirect("create")
             else:
                 message = "User is not active."
                 return render(request, "sign_in.html", {'message': message})
