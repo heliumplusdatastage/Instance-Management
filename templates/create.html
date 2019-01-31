@@ -12,53 +12,90 @@
     </div>
 
     <div class="row">
-        <div class="col-xs-12 col-md-8 col-md-offset-2">
-            <h2>Create an Instance</h2>
-
+        <div class="col-xs-12 col-md-10 col-md-offset-1">
+            <h1>Create a New Instance</h1>
+        </div>
+        <div class="col-xs-12 col-md-10 col-md-offset-1">
             <form method="post" class="create-form" action="">
                 {% csrf_token %}
-                <select class="form-control form-control-lg" id="instance-type">
-                    <option>Instance Type</option>
-                    <option value="t2.2xlarge">t2.2xlarge</option>
-                    <option value="t2.large">t2.large</option>
-                    <option value="p2.xlarge">p2.xlarge</option>
-                </select>
-                <select class="form-control form-control-lg" id="instance-platform">
-                    <option>Platform</option>
-                    <option value="jupyter-hub">JupyterHub</option>
-                    <option value="r-studio">RStudio</option>
-                    <option value="dicom-viewer">DICOM viewer<br></option>
-                </select>
-                <button id="create-instance-button" onclick="createInstance()" class="btn btn-primary btn-lg" formmethod="post">Create New Instance</button>
+
+                <!-- START instance name input -->
+                <div class="form-item inst-name">
+                    <h2 class="form-label">Choose an Instance Name</h2>
+                    <input type="text" class="form-control form-control-lg inst-name__input" placeholder="Instance Name" aria-describedby="instance-name" id="instance-name">
+                </div>
+                <!-- END instance name input -->
+
+                <!-- START instance type select (radio) -->
+                <div class="form-item inst-types">
+                    <h2 class="form-label">Choose an Instance Type</h2>
+                    <div class="inst-types__list">
+                        <input type="radio" name="instance-type" value="t2.large" class="inst-types__item__radio" id="inst-types__t2-large">
+                        <label for="inst-types__t2-large" class="inst-types__label">
+                            <div class="inst-types__item">
+                                <img src="https://picsum.photos/g/150" class="inst-types__item__image">
+                                <div class="inst-types__item__desc">
+                                    <h3>t2.large</h3>
+                                    <h4>CPU instance (2 CPU, 8 GiB Memory, SSD size)</h4>
+                                    <p>Recommended for developing and testing code on a small subset of data</p>
+                                </div>
+                            </div>
+                        </label>
+                        <input type="radio" name="instance-type" value="t2.2xlarge" class="inst-types__item__radio" id="inst-types__t2-2xlarge">
+                        <label for="inst-types__t2-2xlarge" class="inst-types__label">
+                            <div class="inst-types__item">
+                                <img src="https://picsum.photos/g/151" class="inst-types__item__image">
+                                <div class="inst-types__item__desc">
+                                    <h3>t2.2xlarge</h3>
+                                    <h4>Large CPU instance (8 CPU, 32 GiB Memory, SSD size)</h4>
+                                    <p>Recommended when you need more CPU computational power and memory</p>
+                                </div>
+                            </div>
+                        </label>
+                        <input type="radio" name="instance-type" value="p2.xlarge" class="inst-types__item__radio" id="inst-types__p2-xlarge">
+                        <label for="inst-types__p2-xlarge" class="inst-types__label">
+                            <div class="inst-types__item">
+                                <img src="https://picsum.photos/g/152" class="inst-types__item__image">
+                                <div class="inst-types__item__desc">
+                                    <h3>p2.xlarge</h3>
+                                    <h4 class="item__title">Large GPU instance (4 CPU, 61 GiB Memory, SSD size)</h4>
+                                    <p>Recommended when you need a GPU, typically for long-running Deep Learning tasks</p>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <!-- END instance type select (radio) -->
+
+                <div class="form-item submit-button">
+                    <button id="create-instance-button" onclick="createInstance()" class="form-control btn btn-info btn-lg" formmethod="post">Create Instance</button>
+                </div>
                 <!--
-                    Here, we'd need some logic to send the request
-                    and to test whether a repsonse has been received.
+                    We'd need some logic here to send the request and to test whether a repsonse has been received.
                     When the Create button is pressed, remove the button from the DOM (or hide it) and then wait,
                     showing progress bar or loading spinner until the response is received.                
                 -->
                 <script>
-                    function createInstance() {
-                        document.getElementById("create-instance-button").innerHTML = "Redirecting...";
-                    }
+                    function createInstance() { document.getElementById("create-instance-button").innerHTML = "Redirecting..."; }
                 </script>
-            </form>                
+            </form>
         </div>
     </div>
-    
+
     <div class="row">
-        <div class="col-xs-12 col-md-8 col-md-offset-2 running-instances">
-            <h2>Running Instances</h2>
+        <div class="col-xs-12 col-md-10 col-md-offset-1 running-instances">
+            <h1>Running Instances</h1>
             <p>
-                Any already-running instances will appear below.
+                Any instances you've created previously will appear below.
                 Simply click on the name of a running instance to reconnect to it.
             </p>
             <div class="running-instances-bucket t2-large">
                 <h3 class="running-instances-bucket__title">t2.large (4)</h3>
                 <div class="running-instances-bucket__contents">
-                    <button class="btn btn-info" onclick="connectToInstance('Instance Name')">Instance Name</button>
-                    <button class="btn btn-info" onclick="connectToInstance('Another Instance')">Another Instance</button>
-                    <button class="btn btn-info" onclick="connectToInstance('Here's One')">Here's One</button>
-                    <button class="btn btn-info" onclick="connectToInstance('Yet Another One')">Yet Another One</button>
+                    <button class="btn btn-info" onclick="connectToInstance('\'Instance Name\'')">Instance Name</button>
+                    <button class="btn btn-info" onclick="connectToInstance('\'Another Instance\'')">Another Instance</button>
+                    <button class="btn btn-info" onclick="connectToInstance('\'Here\'s One\'')">Here's One</button>
+                    <button class="btn btn-info" onclick="connectToInstance('\'Yet Another One\'')">Yet Another One</button>
                 </div>
             </div>
             <div class="running-instances-bucket t2-large">
@@ -70,20 +107,20 @@
             <div class="running-instances-bucket t2-large">
                 <h3 class="running-instances-bucket__title">t2.large (2)</h3>
                 <div class="running-instances-bucket__contents">
-                    <button class="btn btn-info" onclick="connectToInstance()">So Many</button>
-                    <button class="btn btn-info" onclick="connectToInstance()">Instances</button>
+                    <button class="btn btn-info" onclick="connectToInstance('\'So Many\'')">So Many</button>
+                    <button class="btn btn-info" onclick="connectToInstance('\'Instances\'')">Instances</button>
                 </div>
             </div>
         </div>
                 </div>
         <script>
             // redirect to page when connection where instance interaction occurs
-            function connectToInstance(name) { alert(`Connecting to this instance ${name}...`)}
+            function connectToInstance(name) { alert(`Connecting to the instance named ${name}...`)}
         </script>
     </div>
 
     <div class="row">
-        <div class="col-xs-12 col-md-8 col-md-offset-2">
+        <div class="col-xs-12 col-md-10 col-md-offset-1">
             <div class="instructions">
                 <h4>Dear Helium+ Stack User:</h4>
                 <p>

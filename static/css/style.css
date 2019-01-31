@@ -1,20 +1,30 @@
 /** { border: 1px solid #f66; }*/
 
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
 body {
+  font-family: "Open Sans";
+  font-size: 12pt;
+  --color-commonsshare-green: #2A913C;
+  --color-commonsshare-blue: #32D7DD;
+  --color-jupyterhub-orange: #EE6D0E;
+}
+
+h1 {
+  color: #222;
+}
+h2 {
+  color: #567;
 }
 
 .hero {
   color:#4c7aaf;
   font-style: bold;
-  margin:10rem;
+  margin:5rem;
   text-align: center;
-  height: 25vh;
+  /*height: 25vh;*/
   max-height: 300px;
 }
-
-.color-commons { color: #2A913C; }
-.color-share { color: #32D7DD; }
-.color-jupyterhub { color: #EE6D0E; }
 
 .logo {
   margin: auto;
@@ -22,9 +32,9 @@ body {
   max-width: 600px;
 }
 
-.container {
-  min-height: 100%;
-}
+.color-commons { color: var(--color-commonsshare-green) }
+.color-share { color: var(--color-commonsshare-blue); }
+.color-jupyterhub { color: var(--color-jupyterhub-orange); }
 
 .create-form {
   padding: 4rem 0;
@@ -33,11 +43,85 @@ body {
   text-align: center;
 }
 
-.create-form > select {
+.inst-name {
+/*  display: flex;
+  flex-direction: row;
+*/}
+
+.form-item {
+  margin-bottom: 5rem;
+}
+
+.form-label {
+  margin: 0;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.create-form input {
   font-size: 150%;
-  margin-bottom: 4rem;
   height: 4rem;
 }
+
+/* inst types */
+
+.inst-types__list {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;  
+}
+
+.inst-types__item {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 1rem;
+  padding: 2rem 1rem;
+  border: 1px solid #eee;
+  border-radius: 1rem;
+  transition: border-color 250ms;
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 680px) {
+  .inst-types__list { flex-direction: row; }
+  .inst-types__item { flex-direction: column; }
+}
+
+.inst-types__item:hover {
+  border-color: var(--color-commonsshare-blue);
+}
+
+.inst-types__item__radio  {
+  visibility: hidden;
+}
+
+.inst-types__item__radio:checked + label > .inst-types__item {
+  border-color: var(--color-commonsshare-blue);
+  box-shadow: 0px 0px 8px var(--color-commonsshare-blue);
+}
+
+.inst-types__item__image {
+  max-width: 150px;
+  margin-right: 1rem;
+}
+
+.inst-types__item__desc {
+  flex: 1;
+  margin: 0 1rem;
+}
+
+.create-form button {
+  transition: all 250ms;
+  font-size: 125%;
+  height: 4rem;
+  padding: 0;
+  min-height: 5rem;
+}
+
+/* running instances */
 
 .running-instances {
   margin-bottom: 4rem;
@@ -60,6 +144,8 @@ body {
   border-radius: 5px;
   padding: 0.5rem;
 }
+
+/* footer info / instructions*/
 
 .instructions {
   margin-bottom: 4rem;
