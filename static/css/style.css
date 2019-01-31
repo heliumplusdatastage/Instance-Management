@@ -1,18 +1,23 @@
 /** { border: 1px solid #f66; }*/
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 
 body {
-  font-family: "Open Sans";
-  font-size: 12pt;
+  font-family: "Roboto", sans-serif;
+  font-size: 14pt;
   --color-commonsshare-green: #2A913C;
   --color-commonsshare-blue: #32D7DD;
   --color-jupyterhub-orange: #EE6D0E;
+  --color-running-instance: #A4FF9E;
+  --color-stopped-instance: #FF9EA4;
+  --color-faded-line: #ddd;
+  --color-faded-text: #999;
 }
 
 h1 {
   color: #222;
 }
+
 h2 {
   color: #567;
 }
@@ -103,14 +108,35 @@ h2 {
   box-shadow: 0px 0px 8px var(--color-commonsshare-blue);
 }
 
+.inst-types__item__radio:checked + label > .inst-types__item img {
+  -webkit-filter: grayscale(0%);
+  filter: grayscale(0%);
+}
+
+.inst-types__item__image-container {
+  min-height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .inst-types__item__image {
+  -webkit-filter: grayscale(90%);
+  filter: grayscale(90%);
+  transition: filter 250ms;
   max-width: 150px;
-  margin-right: 1rem;
 }
 
 .inst-types__item__desc {
   flex: 1;
   margin: 0 1rem;
+}
+
+.inst-types__item__details {
+  border-top: 1px solid var(--color-faded-line);
+  margin-top: 1rem;
+  padding-top: 1rem;
+  font-weight: normal;
 }
 
 .create-form button {
@@ -121,28 +147,41 @@ h2 {
   min-height: 5rem;
 }
 
-/* running instances */
+/* instance management */
 
-.running-instances {
+.instance-mgmt {
   margin-bottom: 4rem;
 }
 
-.running-instances-bucket {
+.instance-mgmt__instance {
+  transition: background-color 250ms;
+}
+
+.instance-mgmt__instance:hover {
   background-color: #eee;
-  padding: 0.5rem;
-  border-radius: 5px;
-  margin-bottom: 4rem;
 }
 
-.running-instances-bucket__title {
-  margin: 0 0 1rem 0;
-  padding: 0.5rem;
+.instance-mgmt__instance.stopped-instance {
+  background: repeating-linear-gradient(45deg, #fff, #fff 1px, #eee 1px, #eee 2px);
 }
 
-.running-instances-bucket__contents {
+.instance-mgmt__name__note {
+  color: var(--color-faded-text);
+}
+
+.instance-mgmt__new.badge { }
+
+.instance-mgmt__state {
+  background-color: #eee;
+}
+
+.instance-mgmt__stopped-instance td {
+  background-color: #eee
+}
+
+.instance-mgmt__state.stopped td {
   background-color: #fff;
-  border-radius: 5px;
-  padding: 0.5rem;
+  opacity: 0.5;
 }
 
 /* footer info / instructions*/
