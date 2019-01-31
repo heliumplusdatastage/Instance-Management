@@ -10,11 +10,13 @@
     </div>
 
     <div class="row">
-        <button id="myButton" class="btn" >Launch your instance</button>
+        <div class="col-xs-12 col-md-8 col-md-offset-2">
+            <button id="myButton" class="btn" >Launch your instance</button>
 
-        <script type="text/javascript">
-            document.getElementById("myButton").onclick = function () { location.href = "http://{{ instance_ip }}"; };
-        </script>
+            <script type="text/javascript">
+                document.getElementById("myButton").onclick = function () { location.href = "http://{{ instance_ip }}"; };
+            </script>
+        </div>
     </div>
 
     <div class="row instructions-container">
