@@ -1,4 +1,6 @@
-/** { border: 1px solid #f66; }*/
+* {
+  /*border: 1px solid #f66;*/
+}
 
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
@@ -86,8 +88,9 @@ h2 {
   padding: 2rem 1rem;
   border: 1px solid #eee;
   border-radius: 1rem;
-  transition: border-color 250ms;
   cursor: pointer;
+  box-shadow: 0;
+  transition: box-shadow 250ms, border-color 250ms;
 }
 
 @media only screen and (min-width: 680px) {
@@ -123,7 +126,7 @@ h2 {
 .inst-types__item__image {
   -webkit-filter: grayscale(90%);
   filter: grayscale(90%);
-  transition: filter 250ms;
+  transition: filter 500ms;
   max-width: 150px;
 }
 
@@ -153,6 +156,10 @@ h2 {
   margin-bottom: 4rem;
 }
 
+.instance-mgmt > table {
+  table-layout: auto;
+}
+
 .instance-mgmt__instance {
   transition: background-color 250ms;
 }
@@ -161,8 +168,20 @@ h2 {
   background-color: #eee;
 }
 
+.instance-mgmt__instance tr {
+  display: flex;
+}
+
 .instance-mgmt__instance.stopped-instance {
   background: repeating-linear-gradient(45deg, #fff, #fff 1px, #eee 1px, #eee 2px);
+}
+
+
+.instance-mgmt__name {
+}
+
+.instance-mgmt__name > p {
+  margin: 0;
 }
 
 .instance-mgmt__name__note {
@@ -182,6 +201,22 @@ h2 {
 .instance-mgmt__state.stopped td {
   background-color: #fff;
   opacity: 0.5;
+}
+
+.instance-mgmt__type {
+  text-align: center;
+}
+
+.instance-mgmt__type__note {
+  color: var(--color-faded-text);
+}
+
+.instance-mgmt__icon img {
+  max-width: 40px;
+}
+
+.instance-mgmt__actions {
+  width: 30%;
 }
 
 /* footer info / instructions*/
