@@ -1,40 +1,42 @@
-/** { border: 1px solid #f66; }*/
+* {
+    /*border: 1px solid #f66;*/
+}
 
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 body {
- font-family: "Roboto", sans-serif;
- font-size: 12pt;
- --color-commonsshare-green: #2A913C;
- --color-commonsshare-blue: #32D7DD;
- --color-jupyterhub-orange: #EE6D0E;
- --color-running-instance: #A4FF9E;
- --color-stopped-instance: #FF9EA4;
- --color-faded-line: #ddd;
- --color-faded-text: #999;
+    font-family: "Roboto", sans-serif;
+    font-size: 12pt;
+    --color-commonsshare-green: #2A913C;
+    --color-commonsshare-blue: #32D7DD;
+    --color-jupyterhub-orange: #EE6D0E;
+    --color-running-instance: #A4FF9E;
+    --color-stopped-instance: #FF9EA4;
+    --color-faded-line: #ddd;
+    --color-faded-text: #999;
 }
 
 h1 {
- color: #222;
+    color: #222;
 }
 
 h2 {
- color: #567;
+    color: #567;
 }
 
 .hero {
- color:#4c7aaf;
- font-style: bold;
- margin:5rem;
- text-align: center;
- /*height: 25vh;*/
- max-height: 300px;
+    color:#4c7aaf;
+    font-style: bold;
+    margin:5rem;
+    text-align: center;
+    /*height: 25vh;*/
+    max-height: 300px;
 }
 
 .logo {
- margin: auto;
- width: 100%;
- max-width: 600px;
+    margin: auto;
+    width: 100%;
+    max-width: 600px;
 }
 
 .color-commons { color: var(--color-commonsshare-green) }
@@ -47,49 +49,49 @@ h2 {
     margin: 4rem auto;
 }
 
- .modal-header {
+.modal-header {
   display: flex;
 }
 
- .modal-title {
+.modal-title {
     flex: 1;
 }
 
- .instance-mgmt__title {
+.instance-mgmt__title {
     /*border: 1px solid #f00;*/
     display: flex;
     margin-bottom: 2rem;
 }
 
- .instance-mgmt__title h1 {
+.instance-mgmt__title h1 {
     flex: 1;
 }
 
 .create-form {
- padding: 4rem 0;
- width: 100%;
- margin: auto;
- text-align: center;
+    padding: 4rem 0;
+    width: 100%;
+    margin: auto;
+    text-align: center;
 }
 
 .inst-name {
-/*  display: flex;
- flex-direction: row;
+/*    display: flex;
+    flex-direction: row;
 */}
 
 .form-item {
- margin-bottom: 5rem;
+    margin-bottom: 5rem;
 }
 
 .form-label {
- margin: 0;
- margin-bottom: 2rem;
- text-align: left;
+    margin: 0;
+    margin-bottom: 2rem;
+    text-align: left;
 }
 
 .create-form input {
- font-size: 150%;
- height: 4rem;
+    font-size: 150%;
+    height: 4rem;
 }
 
 /* inst types */
@@ -105,107 +107,140 @@ h2 {
 }
 
 .inst-types__item {
- flex: 1;
- height: 100%;
- display: flex;
- flex-direction: row;
- align-items: center;
- margin: 0 1rem;
- padding: 2rem 1rem;
- border: 1px solid #eee;
- border-radius: 1rem;
- transition: border-color 250ms;
- cursor: pointer;
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 1rem;
+    padding: 2rem 1rem;
+    border: 1px solid #eee;
+    border-radius: 1rem;
+    cursor: pointer;
+    box-shadow: 0;
+    transition: box-shadow 250ms, border-color 250ms;
 }
 
 @media only screen and (min-width: 680px) {
- .inst-types__list { flex-direction: row; }
- .inst-types__item { flex-direction: column; }
+    .inst-types__list { flex-direction: row; }
+    .inst-types__item { flex-direction: column; }
 }
 
 .inst-types__item:hover {
- border-color: var(--color-commonsshare-blue);
+    border-color: var(--color-commonsshare-blue);
 }
 
-.inst-types__item__radio  {
- visibility: hidden;
+.inst-types__item__radio    {
+    visibility: hidden;
 }
 
 .inst-types__item__radio:checked + label > .inst-types__item {
- border-color: var(--color-commonsshare-blue);
- box-shadow: 0px 0px 8px var(--color-commonsshare-blue);
+    border-color: var(--color-commonsshare-blue);
+    box-shadow: 0px 0px 8px var(--color-commonsshare-blue);
 }
 
 .inst-types__item__radio:checked + label > .inst-types__item img {
- -webkit-filter: grayscale(0%);
- filter: grayscale(0%);
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
 }
 
 .inst-types__item__image-container {
- min-height: 150px;
- display: flex;
- justify-content: center;
- align-items: center;
+    min-height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .inst-types__item__image {
- -webkit-filter: grayscale(90%);
- filter: grayscale(90%);
- transition: filter 250ms;
- max-width: 100px;
+    -webkit-filter: grayscale(90%);
+    filter: grayscale(90%);
+    transition: filter 500ms;
+    max-width: 100px;
 }
 
 .inst-types__item__desc {
- flex: 1;
- margin: 0 1rem;
+    flex: 1;
+    margin: 0 1rem;
 }
 
 .inst-types__item__details {
- border-top: 1px solid var(--color-faded-line);
- margin-top: 1rem;
- padding-top: 1rem;
- font-weight: normal;
+    border-top: 1px solid var(--color-faded-line);
+    margin-top: 1rem;
+    padding-top: 1rem;
+    font-weight: normal;
 }
 
 /* instance management */
 
 .instance-mgmt {
- margin-bottom: 4rem;
+    margin-bottom: 4rem;
+}
+
+.instance-mgmt > table {
+    table-layout: auto;
 }
 
 .instance-mgmt__instance {
- transition: background-color 250ms;
+    transition: background-color 250ms;
 }
 
 .instance-mgmt__instance:hover {
- background-color: #eee;
+    background-color: #eee;
+}
+
+.instance-mgmt__instance tr {
+    display: flex;
 }
 
 .instance-mgmt__instance.stopped-instance {
- background: repeating-linear-gradient(45deg, #fff, #fff 1px, #eee 1px, #eee 2px);
+    background: repeating-linear-gradient(45deg, #fff, #fff 1px, #eee 1px, #eee 2px);
+}
+
+
+.instance-mgmt__name {
+}
+
+.instance-mgmt__name > p {
+    margin: 0;
 }
 
 .instance-mgmt__name__note {
- color: var(--color-faded-text);
+    color: var(--color-faded-text);
 }
 
 .instance-mgmt__new.badge { }
 
 .instance-mgmt__state {
- background-color: #eee;
+    background-color: #eee;
 }
 
 .instance-mgmt__stopped-instance td {
- background-color: #eee
+    background-color: #eee
 }
 
 .instance-mgmt__state.stopped td {
- background-color: #fff;
- opacity: 0.5;
+    background-color: #fff;
+    opacity: 0.5;
+}
+
+.instance-mgmt__type {
+    text-align: center;
+}
+
+.instance-mgmt__type__note {
+    color: var(--color-faded-text);
+}
+
+.instance-mgmt__icon img {
+    max-width: 40px;
+}
+
+.instance-mgmt__actions {
+    width: 30%;
 }
 
 /* footer info / instructions*/
 
 .instructions {
- margin-bottom: 4rem;
+    margin-bottom: 4rem;
 }
