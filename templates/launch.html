@@ -13,9 +13,17 @@
         <div class="col-xs-12 col-md-8 col-md-offset-2">
             <button id="myButton" class="btn" >Launch your instance</button>
 
-            <script type="text/javascript">
-                document.getElementById("myButton").onclick = function () { location.href = "http://{{ instance_ip }}"; };
-            </script>
+            <form action="">
+                <select class="form-control form-control-lg" id="instance-platform">
+                    <option>Platform</option>
+                    <option value="jupyter-hub">JupyterHub</option>
+                    <option value="r-studio">RStudio</option>
+                    <option value="dicom-viewer">DICOM viewer<br></option>
+                </select>
+                <script type="text/javascript">
+                    document.getElementById("myButton").onclick = function () { location.href = "http://{{ instance_ip }}"; };
+                </script>
+            </form>
         </div>
     </div>
 
