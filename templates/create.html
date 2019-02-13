@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="hero">
+        <img class="logo" src="/static/images/jup.PNG">
+        <h1>
+            Welcome to
+            <span class="color-commons">Commons</span><span class="color-share">Share's</span>
+            <span class="color-jupyterhub">JupyterHub</span>
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-md-10 col-md-offset-1">
+            <h1>Create a New Instance</h1>
+        </div>
+        <div class="col-xs-12 col-md-10 col-md-offset-1">
+            <form method="post" class="create-form" action="">
+                {% csrf_token %}
+
+                <!-- START instance name input -->
+                <div class="form-item inst-name">
+                    <h2 class="form-label">Choose an Instance Name</h2>
+                    <input type="text" name="ins_name" class="form-control form-control-lg inst-name__input" placeholder="Instance Name" aria-describedby="instance-name" id="instance-name">
+                </div>
+                <!-- END instance name input -->
+
+                <!-- START instance type select (radio) -->
+                <div class="form-item inst-types">
+                    <h2 class="form-label">Choose an Instance Type</h2>
+                    <div class="inst-types__list">
+                        <input type="hidden" name="action" value="Create">
+                        <input type="radio" name="type" value="t2.large" class="inst-types__item__radio" id="inst-types__t2-large" checked>
+                        <label for="inst-types__t2-large" class="inst-types__label">
+                            <div class="inst-types__item">
+                                <div class="inst-types__item__image-container">
+                                    <img src="{% static '/images/instance-types/t2-large.png' %}" class="inst-types__item__image">
+                                </div>
+                                <div class="inst-types__item__desc">
+                                    <h3>t2.large</h3>
+                                    <h4>CPU instance</h4>
+                                    <strong>2 CPU, 8 GiB Memory, SSD size</strong>
+                                    <p class="inst-types__item__details">
+                                        Recommended for developing and testing code on a small subset of data
+                                    </p>
+                                </div>
+                            </div>
+                        </label>
+                        <input type="hidden" name="action" value="Create">
+                        <input type="radio" name="type" value="t2.2xlarge" class="inst-types__item__radio" id="inst-types__t2-2xlarge">
+                        <label for="inst-types__t2-2xlarge" class="inst-types__label">
+                            <div class="inst-types__item">
+                                <div class="inst-types__item__image-container">
+                                    <img src="{% static "/images/instance-types/t2-2xlarge.png" %}" class="inst-types__item__image">
+                                </div>
+                                <div class="inst-types__item__desc">
+                                    <h3>t2.2xlarge</h3>
+                                    <h4>Large CPU instance</h4>
+                                    <strong>Large 8 CPU, 32 GiB Memory, SSD size</strong>
+                                    <p class="inst-types__item__details">
+                                        Recommended when you need more CPU computational power and memory
+                                    </p>
+                                </div>
+                            </div>
+                        </label>
+                        <input type="hidden" name="action" value="Create">
+                        <input type="radio" name="type" value="p2.xlarge" class="inst-types__item__radio" id="inst-types__p2-xlarge">
+                        <label for="inst-types__p2-xlarge" class="inst-types__label">
+                            <div class="inst-types__item">
+                                <div class="inst-types__item__image-container">
+                                    <img src="{% static "/images/instance-types/p2-xlarge.png" %}" class="inst-types__item__image">
+                                </div>
+                                <div class="inst-types__item__desc">
+                                    <h3>p2.xlarge</h3>
+                                    <h4 class="item__title">Large GPU instance</h4>
+                                    <strong class="item__title">Large 4 CPU, 61 GiB Memory, SSD size</strong>
+                                    <p class="inst-types__item__details">
+                                        Recommended when you need a GPU, typically for long-running Deep Learning tasks
+                                    </p>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <!-- END instance type select (radio) -->
+
+                <div class="form-item submit-button">
+                    <button id="create-instance-button" onclick="createInstance()" class="form-control btn btn-info btn-lg" formmethod="post">Create Instance</button>
+                </div>
+                <script>
+                    function createInstance() { document.getElementById("create-instance-button").innerHTML = "Redirecting..."; }
+                </script>
+            </form>
+            <!--
+                We'd need some logic here to send the request and to test whether a repsonse has been received.
+            -->
+            <!--* Once button is pressed, show this progress bar. Will need interaction with server to style dynamically.-->
+            <!--<div class="progress">
+                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                    <span class="sr-only">60% Complete</span>
+                </div>
+            </div>-->
+        </div>
+    </div>
+
+     <div class="row">
+        <div class="col-xs-12 col-md-10 col-md-offset-1 instance-mgmt">
+
+            <h1>Manage Instances</h1>
+            <p>
+                Any previously created instances are shown below.
+                Choose the action to perform on an instance.
+                You may Reconnect to and Stop running instances.
+                Stopped instances must be Restarted before further actions can be taken.
+            </p>
+
+            <table class="table">
+                <tr>
+                    <th>Type</th>
+                    <th>Instance Name - Instance IP</th>
+                    <th>Actions</th>
+                </tr>
+                {% for instance_type, instance_ip, instance_state, launch_time, state_transition, instance_id, instance_name in instances %}
+
+                    {% if instance_state == "running" %}
+                        <tr class="instance-mgmt__instance running-instance">
+                            <td class="instance-mgmt__type">
+                                <!--<img src="{% static '/images/instance-types/t2-2xlarge_thumbnail.png' %}" alt="t2.2xlarge"><br>-->
+                                <small class="instance-mgmt__type__note">{{ instance_type }}</small>
+                            </td>
+                            <td class="instance-mgmt__name">
+                                <h4>{{ instance_name }} - {{ instance_ip }}<span class="badge instance-mgmt__new">Instance Name - Instance IP</span></h4>
+                                <p><small class="instance-mgmt__name__note">Created on {{ launch_time }}</small></p>
+                            </td>
+                            <td class="instance-mgmt__platform">
+                                <form action="???" method="POST">
+                                    {% csrf_token %}
+                                    <select name="platform1" class="form-control" id="inputGroupSelect01">
+                                        <option value="0">Select</option>
+                                        <option value="1">JupyterHub</option>
+                                        <option value="2">RStudio</option>
+                                        <option value="3">DICOM viewer</option>
+                                    </select>
+                                    <input type="hidden" name="type" value={{ instance_type }}>
+                                    <input type="hidden" name="ip" value={{ instance_ip }}>
+                                    <input type="hidden" name="id" value={{ instance_id }}>
+                                    <button class="btn btn-success"formmethod="POST" name="action" value="Start">Start</button>
+                                    <button class="btn btn-warning" formmethod="POST" name="action" value="Stop">Stop</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% elif instance_state == "stopped" %}
+                        <tr class="instance-mgmt__instance running-instance">
+                            <td class="instance-mgmt__type">
+                                <!--<img src="{% static '/images/instance-types/t2.2xlarge.png' %}" alt="t2.2xlarge"><br>-->
+                                <small class="instance-mgmt__type__note">{{ instance_type }}</small>
+                            </td>
+                            <td class="instance-mgmt__name">
+                                <h4>{{ instance_name }} - {{ instance_ip }}<span class="badge instance-mgmt__new">Instance Name - Instance IP</span></h4>
+                                <p><small class="instance-mgmt__name__note">Stopped - {{ state_transition }}</small></p>
+                            </td>
+                            <td class="instance-mgmt__platform">
+                                <form action="???" method="POST" onsubmit="restart.disabled = true; return true;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="type" value={{ instance_type }}>
+                                    <input type="hidden" name="ip" value={{ instance_ip }}>
+                                    <input type="hidden" name="id" value={{ instance_id }}>
+                                    <button id="restart" class="btn btn-info" formmethod="POST" name="action" value="Restart">Restart</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+
+            <script>
+                // redirect to page when connection where instance interaction occurs
+                function connectToInstance(name) { alert(`Connecting to the instance named ${name}...`)}
+            </script>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-md-10 col-md-offset-1">
+            <div class="instructions">
+                <h4>Dear Helium+ Stack User:</h4>
+                <p>
+                    Please note that Amazon EC2 Virtual Machine instance that is being created for you now includes access to real patient
+                    lung data covered by a Data Use Agreement (DUA) you have agreed to.
+                    Please be mindful of this while adhering to the terms of the DUA as you work with this instance.
+                    Your cooperation is appreciated.
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

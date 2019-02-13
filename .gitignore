@@ -1,0 +1,6 @@
+/venv1
+.idea/
+/db-kyle.sqlite3
+/db.sqlite3
+*.pyc
+/instances/config.yaml

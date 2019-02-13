@@ -1,0 +1,191 @@
+/** { border: 1px solid #f66; }*/
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+ font-family: "Roboto", sans-serif;
+ font-size: 12pt;
+ --color-commonsshare-green: #2A913C;
+ --color-commonsshare-blue: #32D7DD;
+ --color-jupyterhub-orange: #EE6D0E;
+ --color-running-instance: #A4FF9E;
+ --color-stopped-instance: #FF9EA4;
+ --color-faded-line: #ddd;
+ --color-faded-text: #999;
+}
+
+h1 {
+ color: #222;
+}
+
+h2 {
+ color: #567;
+}
+
+.hero {
+ color:#4c7aaf;
+ font-style: bold;
+ margin:5rem;
+ text-align: center;
+ /*height: 25vh;*/
+ max-height: 300px;
+}
+
+.logo {
+ margin: auto;
+ width: 100%;
+ max-width: 600px;
+}
+
+.color-commons { color: var(--color-commonsshare-green) }
+.color-share { color: var(--color-commonsshare-blue); }
+.color-jupyterhub { color: var(--color-jupyterhub-orange); }
+
+.create-form {
+ padding: 4rem 0;
+ width: 100%;
+ margin: auto;
+ text-align: center;
+}
+
+.inst-name {
+/*  display: flex;
+ flex-direction: row;
+*/}
+
+.form-item {
+ margin-bottom: 5rem;
+}
+
+.form-label {
+ margin: 0;
+ margin-bottom: 2rem;
+ text-align: left;
+}
+
+.create-form input {
+ font-size: 150%;
+ height: 4rem;
+}
+
+/* inst types */
+
+.inst-types__list {
+ display: flex;
+ flex-direction: column;
+ align-items: stretch;  
+}
+
+.inst-types__item {
+ flex: 1;
+ height: 100%;
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+ margin: 0 1rem;
+ padding: 2rem 1rem;
+ border: 1px solid #eee;
+ border-radius: 1rem;
+ transition: border-color 250ms;
+ cursor: pointer;
+}
+
+@media only screen and (min-width: 680px) {
+ .inst-types__list { flex-direction: row; }
+ .inst-types__item { flex-direction: column; }
+}
+
+.inst-types__item:hover {
+ border-color: var(--color-commonsshare-blue);
+}
+
+.inst-types__item__radio  {
+ visibility: hidden;
+}
+
+.inst-types__item__radio:checked + label > .inst-types__item {
+ border-color: var(--color-commonsshare-blue);
+ box-shadow: 0px 0px 8px var(--color-commonsshare-blue);
+}
+
+.inst-types__item__radio:checked + label > .inst-types__item img {
+ -webkit-filter: grayscale(0%);
+ filter: grayscale(0%);
+}
+
+.inst-types__item__image-container {
+ min-height: 150px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+.inst-types__item__image {
+ -webkit-filter: grayscale(90%);
+ filter: grayscale(90%);
+ transition: filter 250ms;
+ max-width: 150px;
+}
+
+.inst-types__item__desc {
+ flex: 1;
+ margin: 0 1rem;
+}
+
+.inst-types__item__details {
+ border-top: 1px solid var(--color-faded-line);
+ margin-top: 1rem;
+ padding-top: 1rem;
+ font-weight: normal;
+}
+
+.create-form button {
+ transition: all 250ms;
+ font-size: 125%;
+ height: 4rem;
+ padding: 0;
+ min-height: 5rem;
+}
+
+/* instance management */
+
+.instance-mgmt {
+ margin-bottom: 4rem;
+}
+
+.instance-mgmt__instance {
+ transition: background-color 250ms;
+}
+
+.instance-mgmt__instance:hover {
+ background-color: #eee;
+}
+
+.instance-mgmt__instance.stopped-instance {
+ background: repeating-linear-gradient(45deg, #fff, #fff 1px, #eee 1px, #eee 2px);
+}
+
+.instance-mgmt__name__note {
+ color: var(--color-faded-text);
+}
+
+.instance-mgmt__new.badge { }
+
+.instance-mgmt__state {
+ background-color: #eee;
+}
+
+.instance-mgmt__stopped-instance td {
+ background-color: #eee
+}
+
+.instance-mgmt__state.stopped td {
+ background-color: #fff;
+ opacity: 0.5;
+}
+
+/* footer info / instructions*/
+
+.instructions {
+ margin-bottom: 4rem;
+}

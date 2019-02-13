@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="hero">
+        <img class="logo" src="/static/images/pic.PNG">
+        <h1>Congratulations!</h1>
+        <h3>You have created your own Instance</h3> 
+        <h3>Please follow the instructions listed below the <span class="redText">Launch your instance</span> button <br> to activate your JupyterHub server</h3>
+    </div>
+
+    <div class="create-form">
+        <div class="col-xs-12 col-md-8 col-md-offset-2">
+
+            <button id="myButton" class="btn btn-primary btn-lg" >Click Here - To start working</button>
+
+            <script type="text/javascript">
+                document.getElementById("myButton").onclick = function () { location.href = "/createredirect/"; };
+            </script>
+        </div>
+    </div>
+
+    <div class="row instructions-container">
+        <div class="col-xs-12 col-md-8 col-md-offset-2">
+            <div class="instructions">
+                <h4>INSTRUCTIONS:</h4>
+                    <ol>
+                        <li>After you click the <span class="jaffa">Launch Instance</span> button, your JupyterHub instance will require a username and password.</li>
+                        <li>Your username was emailed to you with the subject <span class="jaffa">STAGE Workshop Login Info</span>.</li>
+                        <li>You will need to create your own Password and that is done by entering in your desired Password on the Jupyter Login Page</li>
+                    <ol>
+                </div>
+        </div>
+    </div>
+
+{% endblock %}

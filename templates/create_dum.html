@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="hero">
+        <img class="logo" src="/static/images/jup.PNG">
+        <h1>
+            Welcome to
+            <span class="color-commons">Commons</span><span class="color-share">Share's</span>
+            <span class="color-jupyterhub">JupyterHub</span>
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-8 col-xs-offset-2">
+            <h2>Create an Instance</h2>
+            <h4>Please keep this browser window open while your instance is being created.</h4>
+
+                <form method="post" class="create-form" onsubmit="myBtn.disabled = true; return true;">
+                    {% csrf_token %}
+                    <button id="myBtn" onclick="myFunction()" class="btn btn-primary btn-lg" formmethod="post">Create Instance</button>
+                    <script>function myFunction() { 
+                        document.getElementById("myBtn").innerHTML = "Please wait. You will be redirected. It may take up to 10 mins."; 
+                      }
+                    </script>
+                </form>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-8 col-xs-offset-2">
+            <div class="instructions">
+                <h4>Dear Helium+ Stack User:</h4>
+                <p>
+                    Please note that Amazon EC2 Virtual Machine instance that is being created for you now includes access to real patient 
+                    lung data covered by a Data Use Agreement (DUA) you have agreed to.
+                    Please be mindful of this while adhering to the terms of the DUA as you work with this instance.
+                    Your cooperation is appreciated.
+                </p>                
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+

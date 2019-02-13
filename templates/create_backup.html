@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block content %}
+<html>
+<head>
+  <style>
+
+.btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #74b2aa;
+    color: black;
+    font-size: 16px;
+    padding: 16px 30px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.container .btn:hover {
+    background-color: black;
+    color: white;
+}
+</style>
+</head>
+
+
+<form method="post">
+    {% csrf_token %}
+<h2>Inorder for you to conduct research you will need to create your own Jupyter Notebook Instance</h2>
+  <button id="mybutton" type="submit" formmethod="post" class="btn">Create Your Instance</button>
+</form>
+
+</body>
+
+</html>
+{% endblock %}
+
+
+

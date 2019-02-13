@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="main-container">
+            
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>CommonsShare Apps Library</h1>
+        <p>
+          CommonsShare apps allow you to visualize, analyze, and work with resources
+          (data and models) in CommonsShare. Apps are hosted on separate web servers
+          from the CommonsShare website (www.commonsshare.org) and access CommonsShare
+          resources using web services via the REST applications programmers
+          interface (API). Anyone can write an app an then create a "Web App" resource
+          that holds the configuration information for launching the App from CommonsShare.
+          This page lists NIH Data Commons approved web apps that are supported as part of CommonsShare.</p>
+      </div>	
+    </div>
+  </div>
+  <hr/>		
+  <div class="container apps-container">
+    <div class="row">
+<div class="webapp col-lg-3 col-md-4 col-sm-12">
+          <div class="webapp-listing">
+            <a class="webapp-link" href="https://apps.hydroshare.org/apps/hydroshare-gis/" target="_blank" title="Open HydroShare GIS in new tab">
+                
+                    <img src="/static/images/hydroshare.gif" alt="" width="205" height="205">
+                
+              <h3>
+                HydroShare GIS
+              </h3>
+            </a>
+            <p class="app-description" style="display:none">
+              This web app allows the user to view Raster and Geographic Feature Resources from HydroShare in a customizable way. It is powered by the Tethys Platform (see http://www.tethysplatform.org/).
+              <br><br>
+              <a href="/resource/9674a0af9f30410e9e02397c91284f54">View Resource Page</a>
+            </p>
+
+            
+          </div>
+        </div>
+      
+    </div>
+</div>            
+
+{% endblock %}
